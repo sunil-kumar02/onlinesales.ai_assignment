@@ -16,9 +16,10 @@ write a script (Bash or Python) that generates the same report.
 Data is to be read from the CSV files not from a database.
  */
 
-         import csv
+
 
 //Read department data from CSV
+        import csv
         with open('departments.csv', 'r') as file:
                departments_data = list(csv.reader(file))
 
@@ -89,6 +90,7 @@ Example: 25 => 15
 
 
 /*Task-4 Bash*/
+
 grep '^Xerox' sample.tsv | awk -F '\t' '{print $1"\t"$0}' | awk -F '\t' -v OFS='\t' '{print $2, NR-1}' | nl -w1 -s $'\t' - > output.tsv; cat output.tsv | tee >(wc -l) | tee >(sha1sum) | tail -5
 
 /*1. grep '^Xerox' sample.tsv: Filters the lines from the sample.tsv file that start with 'Xerox'.
@@ -102,8 +104,14 @@ grep '^Xerox' sample.tsv | awk -F '\t' '{print $1"\t"$0}' | awk -F '\t' -v OFS='
  */
 
         ls -l | awk '{print $3}' | sort | uniq | xargs -I {} id -ng {}
-/* 1. ls -l: Lists the files in the current directory in long format.
+
+
+/*
+
+1. ls -l: Lists the files in the current directory in long format.
 2. awk '{print $3}': Extracts the owner name (3rd column) from the output of ls -l.
 3. sort: Sorts the owner names in alphabetical order.
 4. uniq: Filters out duplicate owner names.
 5. xargs -I {} id -ng {}: Passes each unique owner name as an argument to id -ng command, which retrieves the group name of the owner.
+
+ */
